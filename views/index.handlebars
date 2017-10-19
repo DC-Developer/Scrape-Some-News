@@ -1,0 +1,22 @@
+<div class="jumbotron text-center" >
+  <h1 class="display-3">News Scraper</h1>
+  <p class="lead"></p>
+  <hr class="my-4">
+  <p>Scrape the articles of said site and populate them here</p>
+  <p class="lead">
+    <a class="btn btn-primary btn-lg" href="/scrape" role="button">Scrape News</a>
+  </p>
+</div>
+
+{{#each articles}}
+    
+        <div class="container" id ="titleDiv">
+            <a href={{link}} target="_blank">{{title}}</a> <button data-id={{_id}} id="delete">delete</button>
+        </div>
+        
+        {{!-- <div class="container" id ="descDiv">
+            <a href={{title}}>{{title}}</a>
+        </div> --}}
+    
+{{/each}}
+

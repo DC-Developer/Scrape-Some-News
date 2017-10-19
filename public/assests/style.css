@@ -1,0 +1,14 @@
+*{  
+    margin: auto 0;
+    box-sizing: border-box;
+
+}
+#titleDiv{
+    background-color: rgb(70, 70, 247);
+    padding: 5px 5px;
+    margin-bottom: 15px;
+}
+#titleDiv a{
+    font-size: 20px;
+    color: white;
+}
