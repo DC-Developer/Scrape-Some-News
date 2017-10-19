@@ -50,11 +50,18 @@ app.get("/", function(req, res) {
     }
     console.log("I am working");
     res.render("index", hbsObject);
+  
   })
 });
 
 app.get("/scrape", function(req, res) {
- 
+ Article.remove({}, function(err, remove){
+  if(err){
+    throw err;
+  }else{
+    console.log("removed all articles");
+  }
+ })
   request("http://www.echojs.com/", function(error, response, html) {
     // Then, we load that into cheerio and save it to $ for a shorthand selector
     var $ = cheerio.load(html);

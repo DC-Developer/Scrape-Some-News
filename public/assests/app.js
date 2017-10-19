@@ -1,3 +1,11 @@
+$(document).on("click", "#scraper", function(){
+  $.ajax({
+    url: "/scrape"
+  }).done(function(){
+    window.location.replace("/");
+  })
+})
+
 $(document).on("click", "#delete", function(){
     // console.log("you clicked the delete button");
     
