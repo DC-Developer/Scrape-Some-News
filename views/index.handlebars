@@ -23,7 +23,7 @@
     {{!-- decide later whether or not to use forms to delete or ajax --}}
       {{!-- <form action="/api/articles/delete/{{_id}}" method="POST"> --}}
         <div class="container" id ="titleDiv">
-            <a href={{link}} target="_blank">{{title}}</a> <button data-id={{_id}} id="delete">delete</button><button data-id={{_id}} id="save">save</button>
+            <a href={{link}} target="_blank">{{title}}</a> <button data-id={{_id}} id="delete">delete</button><button data-id={{_id}} data-savevalue = "true"id="save">save</button>
         </div>
       {{!-- </form> --}}
           

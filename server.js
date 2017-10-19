@@ -187,7 +187,18 @@ app.post("/api/articles/delete/:id", function(req, res) {
   })
   res.redirect("/"); 
 });
-
+app.put("/api/articles/save/:id", function(req, res) {
+  Article.findOneAndUpdate({"_id":req.params.id},{$set: {"saved": true}}, function(err, data){
+    if(err){
+      console.log("you couldnt save");
+      throw err;
+    }else{
+      // console.log("deleted: ", deleted);
+      console.log("found");
+    }
+  //taking out the redirect here made the save button work!
+  })
+});
 
 // Listen on port 3000
 app.listen(3000, function() {
