@@ -10,7 +10,7 @@
 
 <nav class="nav nav-tabs justify-content-center nav-fill" id="myTab" role="tablist">
   <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-expanded="true">Scraped Articles</a>
-  <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile">Saved Articles</a>
+  <a class="nav-item nav-link " id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile">Saved Articles</a>
 </nav>
 <div class="tab-content" id="nav-tabContent">
   <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
@@ -20,17 +20,32 @@
     </div>
     <br><br>
     {{#each articles}}
-      <form action="/api/articles/delete/{{_id}}" method="POST">
+    {{!-- decide later whether or not to use forms to delete or ajax --}}
+      {{!-- <form action="/api/articles/delete/{{_id}}" method="POST"> --}}
         <div class="container" id ="titleDiv">
-            <a href={{link}} target="_blank">{{title}}</a> <button data-id={{_id}} id="delete">delete</button>
+            <a href={{link}} target="_blank">{{title}}</a> <button data-id={{_id}} id="delete">delete</button><button data-id={{_id}} id="save">save</button>
         </div>
-      </form>
+      {{!-- </form> --}}
           
     {{/each}}
 
   </div>
   <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-    well hello there saved articles
+    <br><br><br>
+    <div class="jumbotron">
+      <h1>Saved Articles</h1>
+    </div>
+    <br><br>
+        {{#each articles}}
+          {{#if saved}}
+    {{!-- decide later whether or not to use forms to delete or ajax --}}
+      {{!-- <form action="/api/articles/delete/{{_id}}" method="POST"> --}}
+              <div class="container" id ="titleDiv">
+                <a href={{link}} target="_blank">{{title}}</a> <button data-id={{_id}} id="delete">delete</button>
+              </div>
+      {{!-- </form> --}}
+          {{/if}}
+    {{/each}}
 
   </div>
 </div>
