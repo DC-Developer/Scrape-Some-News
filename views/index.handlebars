@@ -9,10 +9,12 @@
 </div>
 
 {{#each articles}}
-    
+      <form action="/api/articles/delete/{{_id}}" method="POST">
         <div class="container" id ="titleDiv">
             <a href={{link}} target="_blank">{{title}}</a> <button data-id={{_id}} id="delete">delete</button>
         </div>
+      </form>
+        
         
         {{!-- <div class="container" id ="descDiv">
             <a href={{title}}>{{title}}</a>
