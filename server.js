@@ -52,6 +52,8 @@ app.get("/", function(req, res) {
     res.render("index", hbsObject);
   
   })
+
+   
 });
 
 app.get("/scrape", function(req, res) {
@@ -92,28 +94,19 @@ app.get("/scrape", function(req, res) {
         }
       });
     });
+    res.redirect("/");
   });
-  res.redirect("/");
-  res.send("Scrape Complete");
+  
+  
+  // res.send("Scrape Complete");
+
 });
 
 // This will get the articles we scraped from the mongoDB
 app.get("/articles", function(req, res) {
  
   // TODO: Finish the route so it grabs all of the articles
-  Article.find({})
-  .exec(function(err, doc){
-    if(err){
-      res.send(err);
-    }else{
-      var hbsObject = {
-        articles: doc
-      }
-      //res.render("index", hbsObject);
-      
-      res.json(doc);
-    }
-  })
+
 
 });
 

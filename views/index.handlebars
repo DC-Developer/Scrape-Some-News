@@ -3,9 +3,9 @@
   <p class="lead"></p>
   <hr class="my-4">
   <p>Scrape the articles of said site and populate them here</p>
-  <p class="lead">
-    <a class="btn btn-primary btn-lg" href="/scrape" role="button" id="scraper">Scrape News</a>
-  </p>
+  <form action="/scrape" method="GET">
+    <button  class="btn btn-primary btn-lg" type ="submit"id="scraper">Scrape</button>
+  </form>
 </div>
 
 <nav class="nav nav-tabs justify-content-center nav-fill" id="myTab" role="tablist">
@@ -39,11 +39,11 @@
         {{#each articles}}
           {{#if saved}}
     {{!-- decide later whether or not to use forms to delete or ajax --}}
-      {{!-- <form action="/api/articles/delete/{{_id}}" method="POST"> --}}
+      <form action="/api/articles/delete/{{_id}}" method="POST">
               <div class="container" id ="titleDiv">
                 <a href={{link}} target="_blank">{{title}}</a> <button data-id={{_id}} id="delete">delete</button>
               </div>
-      {{!-- </form> --}}
+      </form>
           {{/if}}
     {{/each}}
 

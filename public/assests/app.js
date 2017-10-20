@@ -1,27 +1,33 @@
-$(document).on("click", "#scraper", function(){
+// $.getJSON("/", function(data){
+  
+// })
+
+$(document).on("submit", "#scraper", function(e){
+  e.preventDefault();
   $.ajax({
-    url: "/scrape"
+    url: "/scrape",
+    method: "GET"
   }).done(function(){
-    window.location.replace("/");
+    location.reload();  
   })
 })
 
-$(document).on("click", "#delete", function(){
+$(document).on("click", "#delete", function(e){
+  e.preventDefault();
     // console.log("you clicked the delete button");
     
     var thisId = $(this).attr("data-id");
     
     $.ajax({
-        method: "POST",
-        url: "api/articles/delete/" + thisId
+        url: "/api/articles/delete/" + thisId,
+        method: "POST"
         //creating a data object to hold the deleted buttons div, which is selected with their id
         // data: {
         //   title: $("#titleDiv").val(),
         // }
       })
         
-        .done(function(data) {
-
+        .then(function(data) {
             location.reload();
             console.log("you clicked the delete button");
         });
@@ -51,8 +57,7 @@ $(document).on("click", "#save", function(){
     })
       
       .then(function(data) {
-        
-          location.reload();
           console.log("you clicked the save button");
+          location.reload();
       });
 });
