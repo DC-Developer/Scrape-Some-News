@@ -106,7 +106,10 @@ app.get("/scrape", function(req, res) {
 app.get("/articles", function(req, res) {
  
   // TODO: Finish the route so it grabs all of the articles
+  Article.find({}, function(err, data){
 
+
+  })
 
 });
 
@@ -193,11 +196,16 @@ app.put("/api/articles/save/:id", function(req, res) {
       console.log("you couldnt save");
       throw err;
     }else{
-      // console.log("deleted: ", deleted);
       console.log("found");
+      var hbsObject={
+        articles: data
+      }
+      res.render("index", hbsObject);
+
     }
   //taking out the redirect here made the save button work!
   })
+  
 });
 
 // Listen on port 3000

@@ -33,19 +33,19 @@ $(document).on("click", "#delete", function(e){
         });
 });
 
-$(document).on("click", "#save", function(){
+$(document).on("click", "#save", function(e){
+  e.preventDefault();
   // console.log("you clicked the delete button");
   
   var thisId = $(this).attr("data-id");
-  console.log("id: ", thisId);
+  console.log("data-id: ", thisId);
   var saveValue =$(this).data("savevalue");
-  console.log(saveValue);
+  console.log("save value: ", saveValue);
   
   var newSavedState = {
     saved: saveValue
   }
 
-  
   $.ajax({
       method: "PUT",
       url: "/api/articles/save/" + thisId,
@@ -57,7 +57,7 @@ $(document).on("click", "#save", function(){
     })
       
       .then(function(data) {
-          console.log("you clicked the save button");
+          // console.log("you clicked the save button");
           location.reload();
       });
 });
