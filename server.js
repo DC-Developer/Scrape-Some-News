@@ -55,7 +55,7 @@ app.get("/", function(req, res) {
 //be sure to add parameters to the remove() so that it only deletes
 //the articles with the default save value of false
 app.get("/scrape", function(req, res) {
- Article.remove({saved: false}, function(err, remove){
+ Article.remove({"saved": false}, function(err, remove){
   if(err){
     throw err;
   }else{
@@ -184,7 +184,6 @@ app.post("/api/articles/delete/:id", function(req, res) {
       throw err;
     }else{
       // console.log("deleted: ", deleted);
-      
     }
      
   })

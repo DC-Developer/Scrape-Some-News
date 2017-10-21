@@ -46,3 +46,7 @@ $(document).on("click", "#save", function(e){
           location.reload();//this will reload the page so the article will populate the saved page section
       });
 });
+$(document).on("click", "#note", function(e){
+  e.preventDefault(); 
+  
+});
