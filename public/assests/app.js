@@ -13,29 +13,20 @@ $(document).on("submit", "#scraper", function(e){
 })
 
 $(document).on("click", "#delete", function(e){
-  e.preventDefault();
-    // console.log("you clicked the delete button");
-    
-    var thisId = $(this).attr("data-id");
+  e.preventDefault(); 
+  var thisId = $(this).attr("data-id");
     
     $.ajax({
         url: "/api/articles/delete/" + thisId,
         method: "POST"
-        //creating a data object to hold the deleted buttons div, which is selected with their id
-        // data: {
-        //   title: $("#titleDiv").val(),
-        // }
-      })
-        
+      })   
         .then(function(data) {
             location.reload();
-            console.log("you clicked the delete button");
         });
 });
 
 $(document).on("click", "#save", function(e){
   e.preventDefault();
-  // console.log("you clicked the delete button");
   
   var thisId = $(this).attr("data-id");
   console.log("data-id: ", thisId);
@@ -50,14 +41,8 @@ $(document).on("click", "#save", function(e){
       method: "PUT",
       url: "/api/articles/save/" + thisId,
       body: newSavedState
-      //creating a data object to hold the deleted buttons div, which is selected with their id
-      // data: {
-      //   title: $("#titleDiv").val(),
-      // }
     })
-      
       .then(function(data) {
-          // console.log("you clicked the save button");
-          location.reload();
+          location.reload();//this will reload the page so the article will populate the saved page section
       });
 });

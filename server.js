@@ -50,18 +50,16 @@ app.get("/", function(req, res) {
     }
     console.log("I am working");
     res.render("index", hbsObject);
-  
   })
-
-   
 });
-
+//be sure to add parameters to the remove() so that it only deletes
+//the articles with the default save value of false
 app.get("/scrape", function(req, res) {
- Article.remove({}, function(err, remove){
+ Article.remove({saved: false}, function(err, remove){
   if(err){
     throw err;
   }else{
-    console.log("removed all articles");
+    console.log("removed articles");
   }
  })
   request("http://www.echojs.com/", function(error, response, html) {
@@ -178,6 +176,8 @@ app.post("/articles/:id", function(req, res) {
   
 
 });
+//take out the delete button for the scraped articles and only
+//apply it for the saved articles. 
 app.post("/api/articles/delete/:id", function(req, res) {
   Article.remove({"_id":req.params.id}, function(err, deleted){
     if(err){
@@ -191,6 +191,8 @@ app.post("/api/articles/delete/:id", function(req, res) {
   res.redirect("/"); 
 });
 app.put("/api/articles/save/:id", function(req, res) {
+  //findOneAndUpdate does find() and update() at the same time. You pass in another object
+  // {$set: {"":""}} and update the document
   Article.findOneAndUpdate({"_id":req.params.id},{$set: {"saved": true}}, function(err, data){
     if(err){
       console.log("you couldnt save");
