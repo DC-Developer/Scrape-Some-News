@@ -48,5 +48,31 @@ $(document).on("click", "#save", function(e){
 });
 $(document).on("click", "#note", function(e){
   e.preventDefault(); 
+  var thisId = $(this).attr("data-id");
+  console.log(thisId);
+});
+//below will take in the data from the textfield of note in the note modal
+$(document).on("click", "#saveNote", function(e){
+  e.preventDefault(); 
+  var parent = $(this).parents("#titleDiv").data();
+  // var thisId = parent._id;
+  console.log("parentId: ", parent);
+  // console.log("save note id: ",thisId);
+  var newTitle = $("#noteTitle").val();
+  console.log(newTitle);
+  var newBody = $("#noteText").val();
+  console.log(newBody);
+  var newNote ={
+    title: newTitle,
+    body: newBody
+  }
+  // $.ajax({
+  //   method: "POST",
+  //   url: "/api/articles/save/" + thisId,
+  //   body: newSavedState
+  // })
+  //   .then(function(data) {
+  //       location.reload();//this will reload the page so the article will populate the saved page section
+  //   });
   
 });
