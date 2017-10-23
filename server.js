@@ -34,7 +34,7 @@ var exphbs = require("express-handlebars");
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
-mongoose.connect("mongodb://localhost/week18day3mongoose");
+mongoose.connect("mongodb://root:root@ds229835.mlab.com:29835/echojs-scraper");
 var db = mongoose.connection;
 
 // Show any mongoose errors
