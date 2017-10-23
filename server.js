@@ -15,7 +15,7 @@ mongoose.Promise = Promise;
 
 var app = express();
 
-var PORT = process.env.MONGODB_URI || "//heroku_1c3q0wjx:i28om9vdi29mpq6u95gr6d9pf0@ds227565.mlab.com:27565/heroku_1c3q0wjx";
+var PORT = process.env || 3000;
 
 
 app.use(logger("dev"));
