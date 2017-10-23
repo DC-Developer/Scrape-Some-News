@@ -15,6 +15,8 @@ mongoose.Promise = Promise;
 
 var app = express();
 
+MONGOLAB_URI = "mongodb://root:root@ds229465.mlab.com:29465/heroku_n12hgckr";
+
 var PORT = process.env.MONGOLAB_URI || 27017;
 
 
@@ -34,7 +36,7 @@ var exphbs = require("express-handlebars");
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
-mongoose.connect("mongodb://root:root@ds229465.mlab.com:29465/heroku_n12hgckr");
+mongoose.connect(MONGOLAB_URI);
 var db = mongoose.connection;
 
 // Show any mongoose errors
