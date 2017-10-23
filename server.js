@@ -15,6 +15,8 @@ mongoose.Promise = Promise;
 
 var app = express();
 
+var PORT = process.env.MONGODB_URI || "//heroku_1c3q0wjx:i28om9vdi29mpq6u95gr6d9pf0@ds227565.mlab.com:27565/heroku_1c3q0wjx";
+
 
 app.use(logger("dev"));
 app.use(bodyParser.urlencoded({
@@ -47,6 +49,6 @@ db.once("open", function() {
 
 
 // Listen on port 3000
-app.listen(3000, function() {
+app.listen(PORT, function() {
   console.log("App running on port 3000!");
 });
