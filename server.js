@@ -15,7 +15,7 @@ mongoose.Promise = Promise;
 
 var app = express();
 
-var PORT = process.env.PORT || 27017;
+var PORT = process.env.MONGOLAB_URI || 27017;
 
 
 app.use(logger("dev"));
@@ -34,10 +34,7 @@ var exphbs = require("express-handlebars");
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
-mongoose.connect(process.env.MONGOLAB_URI, function (error) {
-  if (error) console.error(error);
-  else console.log('mongo connected');
-});
+mongoose.connect("mongodb://root:root@ds229835.mlab.com:29835/echojs-scraper");
 var db = mongoose.connection;
 
 // Show any mongoose errors
@@ -53,5 +50,5 @@ db.once("open", function() {
 
 // Listen on port 3000
 app.listen(PORT, function() {
-  console.log("App running on port 3000!");
+  console.log("App running on port " + PORT);
 });
