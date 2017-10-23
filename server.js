@@ -15,7 +15,7 @@ mongoose.Promise = Promise;
 
 var app = express();
 
-var PORT = process.env || 3000;
+var PORT = process.env.MONGODB_URI || <url to your local database>;
 
 
 app.use(logger("dev"));
