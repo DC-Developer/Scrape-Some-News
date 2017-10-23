@@ -15,7 +15,7 @@ mongoose.Promise = Promise;
 
 var app = express();
 
-MONGOLAB_URI = "mongodb://root:root@ds229465.mlab.com:29465/heroku_n12hgckr";
+var MONGOLAB_URI = "mongodb://root:root@ds229465.mlab.com:29465/heroku_n12hgckr";
 
 var PORT = process.env.MONGOLAB_URI || 27017;
 
