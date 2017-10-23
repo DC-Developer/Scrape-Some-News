@@ -113,71 +113,33 @@ app.get("/articles", function(req, res) {
 
 // This will grab an article by it's ObjectId
 app.get("/articles/:id", function(req, res) {
-
-
-  // TODO
-  // ====
-
-  // Finish the route so it finds one article using the req.params.id,
-
-  // and run the populate method with "note",
-
-  // then responds with the article with the note included
-Article.find({"_id": req.params.id}, function(err, found){
-  if(err){
-    throw(err);
-  }else{
-    res.send(found);
-  }
-})
-.populate("note")
-.exec(function(err, doc){
-  if(err){
-    throw(err);
-  }else{
-    res.send(doc)
-  }
-})
+  Article.findOne({ _id: req.params.id })
+  .populate("note")
+  .then(function(Article) {
+    res.json(Article);
+  })
+  .catch(function(err) {
+    res.json(err);
+  });
 
 });
 
 // Create a new note or replace an existing note
 app.post("/articles/:id", function(req, res) {
-
-
-  // TODO
-  // ====
-
-  // save the new note that gets posted to the Notes collection
-
-  // then find an article from the req.params.id
-
-  // and update it's "note" property with the _id of the new note
-  var newNote = new Note(req.body);
-
-  Note.save(function(err, doc) {
-    // Log any errors
-    if (err) {
-      console.log(err);
-    }
-    // Or log the doc
-    else {
-      console.log(doc);
-    }
-  })
-  Article.find({"_id": req.params.id}, function(err, found){
-    if(err){
-      res.send(err);
-    }else{
-      res.send(found);
-    }
-  })
-  .update({"note": Schema.Types.ObjectId})
+  console.log("request: ", req.body)
+    Note.create(req.body)
+    .then(function(Note) {
+      return Article.findOneAndUpdate({ _id: req.params.id }, { note: Note._id }, { new: true });
+    })
+    .then(function(Article) {
+      res.json(Article);
+    })
+    .catch(function(err) {
+      res.json(err);
+    });
   
 
 });
-//take out the delete button for the scraped articles and only
-//apply it for the saved articles. 
 app.post("/api/articles/delete/:id", function(req, res) {
   Article.remove({"_id":req.params.id}, function(err, deleted){
     if(err){
@@ -185,13 +147,10 @@ app.post("/api/articles/delete/:id", function(req, res) {
     }else{
       // console.log("deleted: ", deleted);
     }
-     
   })
   res.redirect("/"); 
 });
 app.put("/api/articles/save/:id", function(req, res) {
-  //findOneAndUpdate does find() and update() at the same time. You pass in another object
-  // {$set: {"":""}} and update the document
   Article.findOneAndUpdate({"_id":req.params.id},{$set: {"saved": true}}, function(err, data){
     if(err){
       console.log("you couldnt save");

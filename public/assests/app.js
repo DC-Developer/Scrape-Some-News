@@ -48,31 +48,49 @@ $(document).on("click", "#save", function(e){
 });
 $(document).on("click", "#note", function(e){
   e.preventDefault(); 
+  $("#notes").empty();
+  
   var thisId = $(this).attr("data-id");
   console.log(thisId);
+
+  $.ajax({
+    method: "GET",
+    url: "/articles/" + thisId
+  })
+    .done(function(data) {
+     
+      $("#notes").append("<div class ='jumbotron'>"+"<h2> Note for: "  + data.title + "</h2>"+"</div>");  
+      $("#notes").append("<input id='titleinput' name='title' >");
+      $("#notes").append("<textarea id='bodyinput' name='body'></textarea>");
+      $("#notes").append("<button class= 'btn btn-dark'data-id='" + data._id + "' id='savenote'>Save Note</button>");
+
+      if (data.note) {
+        $("#titleinput").val(data.note.title);
+        $("#bodyinput").val(data.note.body);
+      }
+    });
+
 });
-//below will take in the data from the textfield of note in the note modal
-$(document).on("click", "#saveNote", function(e){
-  e.preventDefault(); 
-  var parent = $(this).parents("#titleDiv").data();
-  // var thisId = parent._id;
-  console.log("parentId: ", parent);
-  // console.log("save note id: ",thisId);
-  var newTitle = $("#noteTitle").val();
-  console.log(newTitle);
-  var newBody = $("#noteText").val();
-  console.log(newBody);
-  var newNote ={
-    title: newTitle,
-    body: newBody
-  }
-  // $.ajax({
-  //   method: "POST",
-  //   url: "/api/articles/save/" + thisId,
-  //   body: newSavedState
-  // })
-  //   .then(function(data) {
-  //       location.reload();//this will reload the page so the article will populate the saved page section
-  //   });
+
+$(document).on("click", "#savenote", function() {
+ 
+  var thisId = $(this).attr("data-id");
+
   
+  $.ajax({
+    method: "POST",
+    url: "/articles/" + thisId,
+    data: {
+      title: $("#titleinput").val(),
+      body: $("#bodyinput").val()
+    }
+  })
+    .done(function(data) {
+      console.log(data);
+      $("#notes").empty();
+    });
+
+  $("#titleinput").val("");
+  $("#bodyinput").val("");
 });
+
