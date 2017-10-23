@@ -17,7 +17,7 @@ var app = express();
 
 var MONGOLAB_URI = "mongodb://root:root@ds229465.mlab.com:29465/heroku_n12hgckr";
 
-var PORT = process.env.MONGOLAB_URI || 27017;
+var PORT = process.env.PORT || 3000;
 
 
 app.use(logger("dev"));
